@@ -17,7 +17,9 @@ class Items extends Component implements HasTable
 
     protected function getTableQuery(): Builder
     {
-        return Item::query()->with('board.project');
+        return Item::query()->with('board.project')->whereDoesntHave('board', function (Builder $query) {
+            $query->whereIn('title', ['In progress', 'Live', 'Complete', 'Closed']);
+        });
     }
 
     protected function getTableRecordsPerPageSelectOptions(): array
