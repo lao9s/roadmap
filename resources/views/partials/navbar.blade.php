@@ -21,6 +21,22 @@
                 <li>
                     <a
                         @class([
+                                'flex items-center h-10 px-2 space-x-2 transition rounded-lg ',
+                                'text-white bg-brand-500' => request()->is('items'),
+                                'hover:bg-gray-500/5 focus:bg-brand-500/10 focus:text-brand-600 focus:outline-none' => !request()->is('items')
+                            ])
+                        href="{{ route('items') }}">
+
+                        <x-heroicon-o-view-list class="w-5 h-5 {{ !request()->is('items') ? 'text-gray-500' : ''  }}"/>
+
+                        <span
+                            class="font-normal {{ !request()->is('items') ? 'text-gray-900' : ''  }}">{{ trans('items.all-items') }}</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        @class([
                             'flex items-center h-10 px-2 space-x-2 transition rounded-lg ',
                             'text-white bg-brand-500' => request()->is('my'),
                             'hover:bg-gray-500/5 focus:bg-brand-500/10 focus:text-brand-600 focus:outline-none' => !request()->is('my')

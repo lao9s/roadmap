@@ -4,6 +4,8 @@ return [
     'create' => 'Submit item',
     'update' => 'Update item',
     'edit' => 'Edit item',
+    'all-items' => 'All items',
+    'all-items-description' => 'These are all items',
     'my-items' => 'My items',
     'created-items' => 'Created items',
     'created-items-description' => 'These are the items you\'ve created.',
