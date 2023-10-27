@@ -94,8 +94,15 @@
 
                 <li>
                     <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
+                       href="{{ route('items') }}">
+                        {{ trans('feature-requests.all-feature-requests') }}
+                    </a>
+                </li>
+
+                <li>
+                    <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
                        href="{{ route('my') }}">
-                        {{ trans('items.my-items') }}
+                        {{ trans('feature-requests.my-feature-requests') }}
                     </a>
                 </li>
 
