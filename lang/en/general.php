@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Home',
     'navbar-search' => 'CMD + / to search',
 
-    'recent-items' => 'Recent items',
+    'recent-items' => 'Recent feature requests',
     'recent-comments' => 'Recent comments',
 
     'close' => 'Close',

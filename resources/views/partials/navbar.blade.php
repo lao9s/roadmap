@@ -30,7 +30,7 @@
                         <x-heroicon-o-view-list class="w-5 h-5 {{ !request()->is('items') ? 'text-gray-500' : ''  }}"/>
 
                         <span
-                            class="font-normal {{ !request()->is('items') ? 'text-gray-900' : ''  }}">{{ trans('items.all-items') }}</span>
+                            class="font-normal {{ !request()->is('items') ? 'text-gray-900' : ''  }}">{{ trans('feature-requests.all-feature-requests') }}</span>
                     </a>
                 </li>
 
@@ -44,7 +44,7 @@
                         href="{{ route('my') }}">
                         <x-heroicon-o-view-boards class="w-5 h-5 {{ !request()->is('my') ? 'text-gray-500' : ''  }}"/>
 
-                        <span class="font-medium">{{ trans('items.my-items') }}</span>
+                        <span class="font-medium">{{ trans('feature-requests.my-feature-requests') }}</span>
                     </a>
                 </li>
 

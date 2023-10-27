@@ -55,7 +55,7 @@
                     <li>
                         <x-filament::button color="secondary" onclick="Livewire.emit('openModal', 'modals.item.create-item-modal')"
                                             icon="heroicon-o-plus-circle">
-                            {{ trans('items.create') }}
+                            {{ trans('feature-requests.submit-feature-request') }}
                         </x-filament::button>
                     </li>
             </ul>
@@ -108,7 +108,7 @@
                 <li>
                     <x-filament::button color="secondary" onclick="Livewire.emit('openModal', 'modals.item.create-item-modal')"
                                         icon="heroicon-o-plus-circle">
-                        {{ trans('items.create') }}
+                        {{ trans('feature-requests.submit-feature-request') }}
                     </x-filament::button>
                 </li>
             </ul>

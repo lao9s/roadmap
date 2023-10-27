@@ -2,8 +2,8 @@
 
 return [
     'create-item' => [
-        'name' => 'Create item',
-        'description' => 'Create an item',
+        'name' => 'Submit a Feature Request',
+        'description' => '',
     ],
     'view-item' => [
         'name' => 'View item',

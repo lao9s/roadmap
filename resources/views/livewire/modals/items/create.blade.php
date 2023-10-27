@@ -2,7 +2,7 @@
     <x-slot name="title">
         <div class="flex justify-between items-center">
             <div>
-                {{ trans('items.create') }}
+                {{ trans('feature-requests.submit-feature-request') }}
             </div>
             <div class="text-medium">
                 <button wire:click="$emit('closeModal')">
@@ -56,7 +56,7 @@
         @auth
             @if(!auth()->user()->needsToVerifyEmail())
                 <x-filament::button wire:click="submit">
-                    {{ trans('items.create') }}
+                    {{ trans('feature-requests.submit-feature-request') }}
                 </x-filament::button>
             @endif()
         @endauth
