@@ -48,6 +48,9 @@ module.exports = {
                 primary: colors.blue,
                 success: colors.green,
                 warning: colors.yellow,
+                background: '#FAFAFA',
+                facebook: '#1877f2',
+                discord: '#5865F2'
             },
         },
     },

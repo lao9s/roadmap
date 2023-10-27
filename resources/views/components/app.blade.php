@@ -32,13 +32,13 @@
         <meta name="robots" content="noindex">
     @endif
 </head>
-<body class="antialiased bg-gray-50">
+<body class="antialiased bg-background">
 @if($userNeedsToVerify)
     <div class="relative bg-brand-600">
         <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
             <div class="pr-16 sm:text-center sm:px-16">
                 <p class="font-medium text-white">
-                    <span class="md:inline"> You have not verified your email yet, please verify your email.</span>
+                    <span class="md:inline">You have not verified your email yet, please verify your email.</span>
                     <span class="block sm:ml-2 sm:inline-block">
           <a href="{{ route('verification.notice') }}" class="text-white font-bold underline"> Verify <span
                   aria-hidden="true">&rarr;</span></a>
@@ -51,7 +51,7 @@
 
 @include('partials.header', ['logo' => $logo])
 
-<div class="w-full mx-auto py-5 md:space-x-10 h-full grid grid-cols-6 w-full px-2 sm:px-6 md:px-8 max-w-[1500px]">
+<div class="w-full mx-auto py-5 md:space-x-10 h-full grid grid-cols-6 px-2 sm:px-6 md:px-8 max-w-[1500px]">
     @include('partials.navbar')
 
     <main class="flex-1 h-full col-span-6 lg:col-span-5 lg:border-l lg:pl-5">

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Item;
 use Closure;
 use Filament\Tables;
+use Illuminate\Support\Carbon;
 use Livewire\Component;
 use Filament\Tables\Contracts\HasTable;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,6 +32,10 @@ class Items extends Component implements HasTable
             Tables\Columns\TextColumn::make('total_votes')->label(trans('table.total-votes'))->sortable(),
             Tables\Columns\TextColumn::make('project.title')->label(trans('table.project')),
             Tables\Columns\TextColumn::make('board.title')->label(trans('table.board')),
+            Tables\Columns\TextColumn::make('created_at')
+                ->label(trans('table.created_at'))
+                ->sortable()
+                ->formatStateUsing(fn (Carbon|string $state) => (is_string($state) ? Carbon::parse($state) : $state)->isoFormat('L LTS')),
         ];
     }
 
