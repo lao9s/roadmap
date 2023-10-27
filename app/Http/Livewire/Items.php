@@ -35,7 +35,7 @@ class Items extends Component implements HasTable
             Tables\Columns\TextColumn::make('created_at')
                 ->label(trans('table.created_at'))
                 ->sortable()
-                ->formatStateUsing(fn (Carbon|string $state) => (is_string($state) ? Carbon::parse($state) : $state)->isoFormat('L LTS')),
+                ->formatStateUsing(fn(Carbon|string $state) => (is_string($state) ? Carbon::parse($state) : $state)->isoFormat('L LTS')),
         ];
     }
 
@@ -52,6 +52,16 @@ class Items extends Component implements HasTable
 
             return route('projects.items.show', [$record->project, $record]);
         };
+    }
+
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'created_at';
+    }
+
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
     }
 
     public function render()
