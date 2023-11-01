@@ -1,6 +1,11 @@
 @section('title', $item->title)
 @section('image', $item->getOgImage('"' . $item->excerpt .'"', 'Roadmap - Item'))
 @section('description', $item->excerpt)
+@section('additional_meta')
+    @if(request()->routeIs('items.show'))
+        <link rel="canonical" href="{{ url()->current() }}">
+    @endif
+@endsection
 
 <x-app :breadcrumbs="$project ? [
     ['title' => $project->title, 'url' => route('projects.show', $project)],

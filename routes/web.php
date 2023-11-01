@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ItemEmailUnsubscribeController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\ItemsController;
@@ -51,3 +52,5 @@ Route::group(['middleware' => 'authed'], function () {
 Route::get('/unsubscribe/{item}/{user}', [ItemEmailUnsubscribeController::class, '__invoke'])
     ->name('items.email-unsubscribe')
     ->middleware('signed');
+
+Route::get('sitemap.xml', SitemapController::class);
