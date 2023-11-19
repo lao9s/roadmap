@@ -51,10 +51,8 @@
 
 @include('partials.header', ['logo' => $logo])
 
-<div class="w-full mx-auto py-5 md:space-x-10 h-full grid grid-cols-6 px-2 sm:px-6 md:px-8 max-w-[1500px]">
-    @include('partials.navbar')
-
-    <main class="flex-1 h-full col-span-6 lg:col-span-5 lg:pl-5">
+<div class="container px-4 mx-auto sm:px-6 md:px-8 py-5 md:space-x-10 h-full grid grid-cols-6">
+    <main class="flex-1 h-full col-span-6 lg:col-span-12">
         <div class="pb-4">
             <ul class="flex items-center space-x-0.5 text-sm font-medium text-gray-600">
                 @foreach($breadcrumbs as $breadcrumb)
@@ -84,13 +82,11 @@
 
 <x-filament::notification-manager/>
 
-@livewire('livewire-ui-spotlight')
 @livewire('livewire-ui-modal')
 
 @livewireScripts
 @vite('resources/js/app.js')
 @stack('javascript')
-@livewire('notifications')
 {!! app(\App\Settings\GeneralSettings::class)->custom_scripts !!}
 </body>
 </html>

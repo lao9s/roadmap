@@ -8,15 +8,37 @@
             <span class="">{{ $item->total_votes }}</span>
         </div>
 
-        <a href="{{ route('projects.items.show', [$project, $item]) }}" class="flex-1">
-            <p class="font-bold text-lg group-hover:text-brand-500">{{ $item->title }}</p>
-            <p>{{ $item->excerpt }}</p>
-        </a>
+        <div class="flex-1">
+            @php
+                $url = $project ? route('projects.items.show', [$project, $item]) : route('items.show', $item);
+            @endphp
+
+            <a href="{{ $url }}" class="flex-1">
+                <p class="font-medium text-lg group-hover:text-brand-500">{{ $item->title }}</p>
+                <p class="break-all md:break-normal">{{ $item->excerpt }}</p>
+                <div class="mt-2">
+                    @if($item->board)
+                        <x-badge :type="match ($item->board->title) {
+                                'In progress' => 'info',
+                                'Planned' => 'warning',
+                                'Completed' => 'success',
+                                default => 'dark',
+                            }">
+                            {{ $item->board->title }}
+                        </x-badge>
+                    @else
+                        <x-badge class="mt-2">
+                            Suggested
+                        </x-badge>
+                    @endif
+                </div>
+            </a>
+        </div>
 
         <div class="flex space-x-2">
             @if($item->isPrivate())
                 <span x-data x-tooltip.raw="{{ trans('items.item-private') }}">
-                    <x-heroicon-s-lock-closed class="text-gray-500 fill-gray-500 w-5 h-5" />
+                    <x-heroicon-s-lock-closed class="text-gray-500 fill-gray-500 w-5 h-5"/>
                 </span>
 
                 <span>&centerdot;</span>
@@ -35,7 +57,10 @@
             @endif
 
             <span>
-                {{ $comments }} {{ trans_choice('messages.comments', $comments) }}
+               <a href="{{ $url }}#comments" class="flex items-center space-x-1 text-gray-500">
+                   <span>{{ $item['comments_count'] }}</span>
+                   <x-icons.chat-bubble-left/>
+               </a>
             </span>
         </div>
     </div>

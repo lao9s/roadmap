@@ -1,32 +1,42 @@
-<header class="sticky top-0 z-10 w-full bg-brand-500 shadow text-white"
+<header class="sticky top-0 z-10 w-full bg-dark-primary shadow text-white"
         x-data="{ open: false }">
-    <div class="w-full px-4 mx-auto sm:px-6 md:px-8 max-w-[1500px]">
-        <nav class="flex items-center justify-between h-20">
-            <a class="text-2xl font-semibold tracking-tight"
-               href="{{ route('home') }}">
-                @if(!is_null($logo) && file_exists($logoFile = storage_path('app/public/'.$logo)))
-                    <img src="{{ asset('storage/'.$logo) }}?v={{ md5_file($logoFile) }}" alt="{{ config('app.name') }}" class="h-8"/>
-                @else
-                    {{ config('app.name') }}
-                @endif
-            </a>
+    <div class="container px-4 mx-auto sm:px-6 md:px-8">
+        <nav class="flex items-center justify-between py-4">
+            <div class="flex items-center">
+                <div class="mr-8">
+                    <a class="text-2xl font-semibold tracking-tight"
+                       href="{{ route('home') }}">
+                        @if(!is_null($logo) && file_exists($logoFile = storage_path('app/public/'.$logo)))
+                            <img src="{{ asset('storage/'.$logo) }}?v={{ md5_file($logoFile) }}" alt="{{ config('app.name') }}" class="h-12"/>
+                        @else
+                            {{ config('app.name') }}
+                        @endif
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex space-x-4 relative z-10 pt-0 left-0 flex-row items-center">
+                    <a href="{{ route('home') }}" class="font-bold transition-colors ease-in-out duration-200 {{ !request()->is('/') ? 'text-gray-400 hover:text-white' : 'text-white hover:text-white'  }}">{{ trans('general.dashboard') }}</a>
+                    <a href="{{ route('roadmap') }}" class="font-bold transition-colors ease-in-out duration-200 {{ !request()->is('roadmap') ? 'text-gray-400 hover:text-white' : 'text-white'  }}">{{ trans('general.roadmap') }}</a>
+                </div>
+            </div>
 
             <ul class="items-center hidden space-x-3 text-sm font-medium text-gray-600 lg:flex">
+                @if(app(App\Settings\GeneralSettings::class)->show_app_home_in_header)
                 <li>
-                    <kbd @click="$dispatch('toggle-spotlight')" class="cursor-pointer p-1 items-center shadow justify-center rounded border border-gray-400 hover:bg-gray-200 bg-white font-semibold text-gray-900">{{ trans('general.navbar-search') }}</kbd>
+                    <a class="flex items-center font-bold transition-colors ease-in-out duration-200 text-gray-400 hover:text-white"
+                       href=" {{ app(App\Settings\GeneralSettings::class)->app_home_url }}">
+                        <x-icons.arrow-top-right class="mr-2"/>
+                       {{ app(App\Settings\GeneralSettings::class)->app_home_name }}
+                    </a>
                 </li>
+                @endif
+
                 @guest
                     <li>
-                        <a class="flex items-center justify-center text-white hover:text-gray-50 focus:outline-none"
-                           href="{{ route('login') }}">
-                            {{ trans('auth.login') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a class="flex items-center justify-center text-white hover:text-gray-50 focus:outline-none"
-                           href="{{ route('register') }}">
-                            {{ trans('auth.register') }}
-                        </a>
+                        <x-button-secondary type="a" href="{{ route('login') }}">
+                            <x-icons.user-circle class="xl:mr-2"/>
+                            <span class="hidden xl:block">Log In</span>
+                        </x-button-secondary>
                     </li>
                 @endguest
 
@@ -52,12 +62,12 @@
                     </li>
                 @endauth
 
-                    <li>
-                        <x-filament::button color="secondary" onclick="Livewire.emit('openModal', 'modals.item.create-item-modal')"
-                                            icon="heroicon-o-plus-circle">
-                            {{ trans('feature-requests.submit-feature-request') }}
-                        </x-filament::button>
-                    </li>
+                <li>
+                    <x-button color="secondary" onclick="Livewire.emit('openModal', 'modals.item.create-item-modal')">
+                        <x-icons.plus class="xl:mr-2"/>
+                        {{ trans('feature-requests.submit-feature-request') }}
+                    </x-button>
+                </li>
             </ul>
 
             <!-- Hamburger -->
@@ -79,7 +89,7 @@
         </nav>
 
         <!-- Mobile menu -->
-        <nav class="-mx-2 lg:hidden"
+        <nav class="-mx-2 lg:hidden pb-2"
              x-show="open"
              x-cloak>
             <div class="border-t border-brand-400"></div>
@@ -94,17 +104,19 @@
 
                 <li>
                     <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
-                       href="{{ route('items') }}">
-                        {{ trans('feature-requests.all-feature-requests') }}
+                       href="{{ route('roadmap') }}">
+                        {{ trans('general.roadmap') }}
                     </a>
                 </li>
 
-                <li>
-                    <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
-                       href="{{ route('my') }}">
-                        {{ trans('feature-requests.my-feature-requests') }}
-                    </a>
-                </li>
+                @auth
+                    <li>
+                        <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
+                           href="{{ route('my') }}">
+                            {{ trans('feature-requests.my-feature-requests') }}
+                        </a>
+                    </li>
+                @endauth
 
                 <li>
                     <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
@@ -112,28 +124,12 @@
                         {{ trans('auth.profile') }}
                     </a>
                 </li>
+
                 <li>
-                    <x-filament::button color="secondary" onclick="Livewire.emit('openModal', 'modals.item.create-item-modal')"
-                                        icon="heroicon-o-plus-circle">
+                    <x-button onclick="Livewire.emit('openModal', 'modals.item.create-item-modal')">
                         {{ trans('feature-requests.submit-feature-request') }}
-                    </x-filament::button>
+                    </x-button>
                 </li>
-            </ul>
-        </nav>
-
-        <nav class="-mx-2 lg:hidden"
-             x-show="open"
-             x-cloak>
-
-            <ul class="flex flex-col py-2 space-y-1 text-sm font-medium text-white">
-                @foreach($projects as $project)
-                    <li>
-                        <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
-                           href="{{ route('projects.show', $project) }}">
-                            {{ $project->title }}
-                        </a>
-                    </li>
-                @endforeach
             </ul>
         </nav>
     </div>

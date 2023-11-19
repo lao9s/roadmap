@@ -34,6 +34,10 @@ class GeneralSettings extends Settings
     public array $profanity_words;
     public bool $show_github_link;
 
+    public bool $show_app_home_in_header;
+    public string $app_home_name;
+    public string $app_home_url;
+
     public function getInboxWorkflow(): InboxWorkflow
     {
         return InboxWorkflow::from($this->inbox_workflow);

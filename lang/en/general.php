@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'dashboard' => 'Home',
+    'dashboard' => 'Feedback',
+    'roadmap' => 'Roadmap',
     'navbar-search' => 'CMD + / to search',
 
     'recent-items' => 'Recent feature requests',
@@ -9,4 +10,5 @@ return [
 
     'close' => 'Close',
     'save' => 'Save',
+    'search' => 'Search...'
 ];

@@ -1,4 +1,4 @@
-<div>
+<div id="comments">
     @foreach($comments[0] ?? [] as $comment)
         <x-comment :comments="$comments" :comment="$comment" :item="$item" :reply="$reply"></x-comment>
     @endforeach
@@ -19,7 +19,7 @@
         (function () {
             const hash = window.location.hash;
 
-            if (hash) {
+            if (hash && hash !== '#comments') {
                 const commentElement = document.getElementById(hash.replace('#', ''));
                 commentElement.classList.add('bg-brand-50', 'rounded-lg', 'ring-1', 'ring-brand-200', 'mt-2', 'mb-2');
             }

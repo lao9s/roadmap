@@ -86,7 +86,7 @@ class Settings extends SettingsPage
 
                             Toggle::make('project_required_when_creating_item')
                                 ->label('Project is required when creating an item')
-                                ->hidden(fn (Closure $get) => $get('select_project_when_creating_item') === false)
+                                ->hidden(fn(Closure $get) => $get('select_project_when_creating_item') === false)
                                 ->columnSpan(2),
 
                             Toggle::make('select_board_when_creating_item')
@@ -96,7 +96,7 @@ class Settings extends SettingsPage
 
                             Toggle::make('board_required_when_creating_item')
                                 ->label('Board is required when creating an item')
-                                ->hidden(fn (Closure $get) => $get('select_board_when_creating_item') === false)
+                                ->hidden(fn(Closure $get) => $get('select_board_when_creating_item') === false)
                                 ->columnSpan(2),
 
                             Toggle::make('users_must_verify_email')
@@ -111,6 +111,21 @@ class Settings extends SettingsPage
                                 ->label('Show a link to the linked GitHub issue on the item page')
                                 ->columnSpan(2)
                                 ->visible((new GitHubService)->isEnabled()),
+
+                            Group::make([
+                                Toggle::make('show_app_home_in_header')
+                                    ->label('Show app home button in header')
+                                    ->columnSpan(2),
+
+                                TextInput::make('app_home_name')
+                                    ->helperText('Entering the name here will show a app home button in the header.')
+                                    ->columnSpan(2),
+//                                    ->visible(fn($get) => $get('show_app_home_in_header')),
+
+                                TextInput::make('app_home_url')
+                                    ->helperText('Entering the URL here will show a app home button in the header.') ->columnSpan(2),
+//                                    ->visible(fn($get) => $get('show_app_home_in_header')),
+                            ]),
 
                             Grid::make()->schema([
                                 Select::make('inbox_workflow')
@@ -127,39 +142,39 @@ class Settings extends SettingsPage
                         ]),
 
                     Tabs\Tab::make('Default boards')
-                            ->schema([
-                                Toggle::make('create_default_boards')->label('Create default boards for new projects')
-                                      ->helperText('When creating a new project, some default boards can be created.')
-                                      ->reactive()
-                                      ->columnSpan(2),
+                        ->schema([
+                            Toggle::make('create_default_boards')->label('Create default boards for new projects')
+                                ->helperText('When creating a new project, some default boards can be created.')
+                                ->reactive()
+                                ->columnSpan(2),
 
-                                Group::make([
-                                    Repeater::make('default_boards')
-                                            ->columns(2)
-                                            ->columnSpan(2)
-                                            ->schema([
-                                                Grid::make(2)->schema([
-                                                    TextInput::make('title')->required(),
-                                                    Select::make('sort_items_by')
-                                                          ->options([
-                                                              Board::SORT_ITEMS_BY_POPULAR => 'Popular',
-                                                              Board::SORT_ITEMS_BY_LATEST => 'Latest',
-                                                          ])
-                                                          ->default(Board::SORT_ITEMS_BY_POPULAR)
-                                                          ->required(),
-                                                ]),
-                                                Grid::make(2)->schema([
-                                                    Toggle::make('visible')->default(true)->helperText('Hides the board from the public view, but will still be accessible if you use the direct URL.'),
-                                                    Toggle::make('can_users_create')->helperText('Allow users to create items in this board.'),
-                                                    Toggle::make('block_comments')->helperText('Block users from commenting to items in this board.'),
-                                                    Toggle::make('block_votes')->helperText('Block users from voting to items in this board.'),
-                                                ]),
+                            Group::make([
+                                Repeater::make('default_boards')
+                                    ->columns(2)
+                                    ->columnSpan(2)
+                                    ->schema([
+                                        Grid::make(2)->schema([
+                                            TextInput::make('title')->required(),
+                                            Select::make('sort_items_by')
+                                                ->options([
+                                                    Board::SORT_ITEMS_BY_POPULAR => 'Popular',
+                                                    Board::SORT_ITEMS_BY_LATEST => 'Latest',
+                                                ])
+                                                ->default(Board::SORT_ITEMS_BY_POPULAR)
+                                                ->required(),
+                                        ]),
+                                        Grid::make(2)->schema([
+                                            Toggle::make('visible')->default(true)->helperText('Hides the board from the public view, but will still be accessible if you use the direct URL.'),
+                                            Toggle::make('can_users_create')->helperText('Allow users to create items in this board.'),
+                                            Toggle::make('block_comments')->helperText('Block users from commenting to items in this board.'),
+                                            Toggle::make('block_votes')->helperText('Block users from voting to items in this board.'),
+                                        ]),
 
-                                                Textarea::make('description')->helperText('Used as META description for SEO purposes.')->columnSpan(2),
+                                        Textarea::make('description')->helperText('Used as META description for SEO purposes.')->columnSpan(2),
 
-                                            ]),
-                                ])->columnSpan(2)->visible(fn ($get) => $get('create_default_boards')),
-                            ]),
+                                    ]),
+                            ])->columnSpan(2)->visible(fn($get) => $get('create_default_boards')),
+                        ]),
 
                     Tabs\Tab::make('Dashboard items')
                         ->schema([
@@ -170,6 +185,7 @@ class Settings extends SettingsPage
                                     Select::make('type')
                                         ->reactive()
                                         ->options([
+                                            'feedback' => 'Feedback',
                                             'recent-items' => 'Recent items',
                                             'recent-comments' => 'Recent comments'
                                         ])->default('recent-items'),
@@ -179,10 +195,10 @@ class Settings extends SettingsPage
                                     ])->default(1),
                                     Toggle::make('must_have_project')
                                         ->reactive()
-                                        ->visible(fn ($get) => $get('type') === 'recent-items')
+                                        ->visible(fn($get) => $get('type') === 'recent-items')
                                         ->helperText('Enable this to show items that have a project'),
                                     Toggle::make('must_have_board')
-                                        ->visible(fn ($get) => $get('must_have_project') && $get('type') === 'recent-items')
+                                        ->visible(fn($get) => $get('must_have_project') && $get('type') === 'recent-items')
                                         ->helperText('Enable this to show items that have a board'),
                                 ])->helperText('Determine which items you want to show on the dashboard (for all users).'),
                         ]),
@@ -195,11 +211,11 @@ class Settings extends SettingsPage
                                 ->columnSpan(2),
                             Toggle::make('show_changelog_author')
                                 ->label('Show the author of the changelog.')
-                                ->visible(fn ($get) => $get('enable_changelog'))
+                                ->visible(fn($get) => $get('enable_changelog'))
                                 ->columnSpan(2),
                             Toggle::make('show_changelog_related_items')
                                 ->label('Show the related items on the changelog.')
-                                ->visible(fn ($get) => $get('enable_changelog'))
+                                ->visible(fn($get) => $get('enable_changelog'))
                                 ->columnSpan(2),
                         ]),
 

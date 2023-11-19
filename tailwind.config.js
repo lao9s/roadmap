@@ -44,18 +44,47 @@ module.exports = {
                     800: 'var(--color-brand-800)',
                     900: 'var(--color-brand-900)',
                 },
+                dark: {
+                    primary: '#151522',
+                    secondary: '#22222F',
+                    accent: '#282834',
+                },
                 danger: colors.rose,
-                primary: colors.blue,
+                primary: colors.indigo,
                 success: colors.green,
                 warning: colors.yellow,
                 background: '#FAFAFA',
                 facebook: '#1877f2',
                 discord: '#5865F2'
             },
+            boxShadow: {
+                'default': '0 5px 10px rgb(55 55 89 / 8%)',
+            },
         },
     },
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
+        function ({ addComponents }) {
+            addComponents({
+                '.container': {
+                    width: '100%',
+                    paddingLeft: '1rem',
+                    paddingRight: '1rem',
+                    '@screen sm': {
+                        maxWidth: '640px',
+                    },
+                    '@screen md': {
+                        maxWidth: '768px',
+                    },
+                    '@screen lg': {
+                        maxWidth: '1024px',
+                    },
+                    '@screen xl': {
+                        maxWidth: '1280px',
+                    },
+                }
+            })
+        }
     ],
 }

@@ -30,7 +30,6 @@
         "symfony/mailgun-mailer": "^6.0",
         "symfony/postmark-mailer": "^6.0",
         "wire-elements/modal": "^1.0.7",
-        "wire-elements/spotlight": "^1.0.7",
         "xetaio/xetaravel-mentions": "*"
     },
     "require-dev": {

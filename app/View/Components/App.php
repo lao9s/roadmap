@@ -2,16 +2,13 @@
 
 namespace App\View\Components;
 
-use App\Models\Project;
 use App\Services\Tailwind;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use App\Settings\GeneralSettings;
-use Illuminate\Database\Eloquent\Collection;
 
 class App extends Component
 {
-    public Collection $projects;
     public string $brandColors;
     public ?string $logo;
     public array $fontFamily;
@@ -20,16 +17,6 @@ class App extends Component
 
     public function __construct(public array $breadcrumbs = [])
     {
-        $this->projects = Project::query()
-            ->visibleForCurrentUser()
-            ->when(app(GeneralSettings::class)->show_projects_sidebar_without_boards === false, function ($query) {
-                return $query->has('boards');
-            })
-            ->orderBy('sort_order')
-            ->orderBy('group')
-            ->orderBy('title')
-            ->get();
-
         $this->blockRobots = app(GeneralSettings::class)->block_robots;
     }
 
