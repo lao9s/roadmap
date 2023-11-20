@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemEmailUnsubscribeController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;
-use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BoardsController;
 use App\Http\Controllers\ProjectController;
@@ -22,9 +22,7 @@ Route::get('oauth/callback', [\App\Http\Controllers\Auth\LoginController::class,
 Route::get('password-protection', PasswordProtectionController::class)->name('password.protection');
 Route::post('password-protection', [PasswordProtectionController::class, 'login'])->name('password.protection.login');
 
-Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
-
-Route::get('items', ItemsController::class)->name('items');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('changelog', [ChangelogController::class, 'index'])->name('changelog');
 Route::get('changelog/{changelog}', [ChangelogController::class, 'show'])->name('changelog.show');
@@ -54,3 +52,8 @@ Route::get('/unsubscribe/{item}/{user}', [ItemEmailUnsubscribeController::class,
     ->middleware('signed');
 
 Route::get('sitemap.xml', SitemapController::class);
+
+// Redirects
+Route::get('items', function () {
+    return redirect(route('home'), 301);
+});
