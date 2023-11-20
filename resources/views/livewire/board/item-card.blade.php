@@ -1,4 +1,4 @@
-<li class="pb-5 pt-5 first:pt-0 group">
+<li class="pb-5 pt-5 last:pb-0 first:pt-0 group">
     <div class="flex space-x-3">
         <div class="flex flex-col text-center space-y-1">
             <button wire:click="toggleUpvote" class="hover:text-primary-500">

@@ -112,6 +112,10 @@ class Settings extends SettingsPage
                                 ->columnSpan(2)
                                 ->visible((new GitHubService)->isEnabled()),
 
+                            TextInput::make('roadmap_project_url')
+                                ->helperText('This allows you to link to a project in your roadmap url, this will show a link in the header.')
+                                ->columnSpan(2),
+
                             Group::make([
                                 Toggle::make('show_app_home_in_header')
                                     ->label('Show app home button in header')

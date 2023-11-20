@@ -2,12 +2,27 @@
 @section('image', $project->getOgImage($project->description, 'Roadmap - Project'))@show
 @section('description', $project->description)@show
 
-<x-app :breadcrumbs="[
-    ['title' => $project->title, 'url' => route('projects.show', $project)]
-]">
+<x-app>
+    <div class="prose">
+        <h1>
+            Roadmap of {{ $project->title }}
+        </h1>
+    </div>
+
+    <div class="mt-5">
+        <x-navigation.tabs>
+            @foreach($projects as $item)
+                <x-navigation.tab
+                    :href="route('projects.show', $item)"
+                    :active="$item->id == $project->id"
+                >{{ $item->title }}</x-navigation.tab>
+            @endforeach
+        </x-navigation.tabs>
+    </div>
+
     <div
         @class([
-        'inline-flex h-full w-full min-w-full gap-4 flex-nowrap overflow-scroll',
+        'inline-flex h-full w-full min-w-full gap-4 flex-nowrap overflow-auto mt-10',
         'justify-center' => app(\App\Settings\GeneralSettings::class)->board_centered
         ])
     >
@@ -26,7 +41,7 @@
                         @forelse($board->items as $item)
                             <li>
                                 <a href="{{ route('projects.items.show', [$project, $item]) }}"
-                                   class="block p-4 space-y-4 bg-white shadow rounded-xl hover:bg-gray-50">
+                                   class="block p-4 space-y-4 bg-white shadow-default rounded-xl hover:bg-gray-50">
                                     <div class="flex justify-between">
                                         <p>
                                             {{ $item->title }}

@@ -24,10 +24,6 @@ Route::post('password-protection', [PasswordProtectionController::class, 'login'
 
 Route::get('/', \App\Http\Controllers\HomeController::class)->name('home');
 
-Route::get('roadmap', function () {
-    return view('roadmap');
-})->name('roadmap');
-
 Route::get('items', ItemsController::class)->name('items');
 
 Route::get('changelog', [ChangelogController::class, 'index'])->name('changelog');

@@ -8,9 +8,12 @@ class ProjectController extends Controller
 {
     public function show($id)
     {
+        $projects = Project::select('id', 'slug', 'title')->visibleForCurrentUser()->get();
+
         $project = Project::query()->visibleForCurrentUser()->where('slug', $id)->firstOrFail();
 
         return view('project', [
+            'projects' => $projects,
             'project' => $project,
             'boards' => $project->boards()
                 ->visible()

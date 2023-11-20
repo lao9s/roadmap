@@ -16,7 +16,10 @@
 
                 <div class="hidden lg:flex space-x-4 relative z-10 pt-0 left-0 flex-row items-center">
                     <a href="{{ route('home') }}" class="font-bold transition-colors ease-in-out duration-200 {{ !request()->is('/') ? 'text-gray-400 hover:text-white' : 'text-white hover:text-white'  }}">{{ trans('general.dashboard') }}</a>
-                    <a href="{{ route('roadmap') }}" class="font-bold transition-colors ease-in-out duration-200 {{ !request()->is('roadmap') ? 'text-gray-400 hover:text-white' : 'text-white'  }}">{{ trans('general.roadmap') }}</a>
+
+                    @if($roadmap_project_url = app(App\Settings\GeneralSettings::class)->roadmap_project_url)
+                        <a href="/{{ $roadmap_project_url }}" class="font-bold transition-colors ease-in-out duration-200 {{ !request()->is($roadmap_project_url) ? 'text-gray-400 hover:text-white' : 'text-white'  }}">{{ trans('general.roadmap') }}</a>
+                    @endif
                 </div>
             </div>
 
@@ -103,10 +106,13 @@
                 </li>
 
                 <li>
-                    <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
-                       href="{{ route('roadmap') }}">
-                        {{ trans('general.roadmap') }}
-                    </a>
+
+                    @if($roadmap_project_url = app(App\Settings\GeneralSettings::class)->roadmap_project_url)
+                        <a class="block p-2 transition rounded-lg focus:outline-none hover:bg-brand-500-400"
+                           href="/{{ $roadmap_project_url }}">
+                            {{ trans('general.roadmap') }}
+                        </a>
+                    @endif
                 </li>
 
                 @auth
