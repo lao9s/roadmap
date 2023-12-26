@@ -10,7 +10,7 @@
             <div class="text-lg mr-2 text-gray-600">Join our community:</div>
 
             <div class="flex items-center space-x-1 md:space-x-4 mt-1">
-                <a href="https://discord.gg/5YdseZnK2Z" target="_blank" rel="nofollow noopener"
+                <a href="https://mixpost.app/discord" target="_blank" rel="nofollow noopener"
                    class="flex items-center text-blue-500 hover:text-blue-600 transition-colors ease-in-out duration-200">
                     <svg class="!w-5 !h-5 text-discord mr-2" fill="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
