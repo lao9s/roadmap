@@ -12,6 +12,9 @@ use App\Http\Controllers\ChangelogController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\PasswordProtectionController;
 
+// Redirects
+require 'redirects.php';
+
 Auth::routes();
 
 Route::get('oauth/login', [\App\Http\Controllers\Auth\LoginController::class, 'redirectToProvider'])
@@ -52,6 +55,3 @@ Route::get('/unsubscribe/{item}/{user}', [ItemEmailUnsubscribeController::class,
     ->middleware('signed');
 
 Route::get('sitemap.xml', SitemapController::class);
-
-// Redirects
-require 'redirects.php';
