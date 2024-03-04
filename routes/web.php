@@ -54,6 +54,4 @@ Route::get('/unsubscribe/{item}/{user}', [ItemEmailUnsubscribeController::class,
 Route::get('sitemap.xml', SitemapController::class);
 
 // Redirects
-Route::get('items', function () {
-    return redirect(route('home'), 301);
-});
+require 'redirects.php';
