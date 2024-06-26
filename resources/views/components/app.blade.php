@@ -33,6 +33,10 @@
     @endif
 </head>
 <body class="antialiased bg-background">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LT89NF6"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 @if($userNeedsToVerify)
     <div class="relative bg-brand-600">
         <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
